@@ -23,6 +23,7 @@ var questions = [
 
 var startButton = document.querySelector("#startButton");
 var timeEl = document.querySelector("#time");
+var quizArea = document.querySelector("#quizArea")
 var secondsLeft = 5;
 var currentQ = -1;
 
@@ -37,11 +38,26 @@ function startGame() {
 }
 function endGame() {
     console.log("game over");
-}
+} // end endGame function definition
 function displayQuestion(qNumber) {
+    var questionBody = "this is the question body";
+    quizArea.innerHTML = "";
     qNumber++
-    console.log("display question" + qNumber);
-}
+
+    console.log("display question\n" + JSON.stringify(questions[qNumber]));
+    console.log("questions\n" + questions[qNumber].q);
+    questionBody = "<h2>" + questions[qNumber].q + "</h2>";
+    
+
+    for (var i = 0; i < questions[qNumber].options.length; i++) {
+        console.log(i + ". " + questions[qNumber].options[i]);
+        questionBody += "<button><p>" + (i + 1) + ". " + questions[qNumber].options[i] + "</p></button> <br>";
+    }
+
+    quizArea.innerHTML = questionBody;
+} // end displayQuestion function definition
+
+
 function setTime() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
@@ -51,7 +67,7 @@ function setTime() {
             endGame();
         }
     }, 1000);
-}
+} // end setTime function definition
 // Click on Start button
     // Start the timer
     // Display the first question with options 
