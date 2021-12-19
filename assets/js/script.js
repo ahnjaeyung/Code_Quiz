@@ -23,6 +23,31 @@ var questions = [
         q: "What kind of vehicle does Dennis drive?",
         options: ["Toyota Prius", "Range Rover", "BMW 3-series", "Dodge Challenger"],
         correct: "Range Rover"
+    },
+    {
+        q: "What movie franchise does the gang remake?",
+        options: ["Jaws", "Lethal Weapon", "Thunder Gun Express", "Die Hard"],
+        correct: "Lethal Weapon"
+    },
+    {
+        q: "How does Mac's cousin, Country Mac, die?",
+        options: ["Falling off his motorcycle", "Jumping off a bridge", "Drunken bar fight", "Eaten by a whale"],
+        correct: "Falling off his motorcycle"
+    },
+    {
+        q: "Who is Charlie in love with?",
+        options: ["Dee", "Artemis", "Gale the Snail", "The Waitress"],
+        correct: "The Waitress"
+    },
+    {
+        q: "What is Charlie's uncle's profession?",
+        options: ["Lawyer", "Doctor", "Teacher", "Police Officer"],
+        correct: "Lawyer"
+    },
+    {
+        q: "What kind of business do the gang own?",
+        options: ["Thrift store", "Bowling Alley", "Pawn Shop", "Bar"],
+        correct: "Bar"
     }
 ]
 
@@ -97,7 +122,8 @@ function endGame() {
     endGameSubBtn.textContent = "Submit";
     quizArea.appendChild(endGameSubBtn);
 
-
+    var answerCheck = document.querySelector("#answerCheck")
+    answerCheck.innerHTML = "";
 } // end endGame function definition
 
 function saveScore() {
@@ -150,18 +176,22 @@ function displayQuestion() {
 function handleUserAnswer() {
     var separatorBar = document.createElement("hr")
     var feedback = document.createElement("p")
+    var answerCheck = document.querySelector("#answerCheck")
+    answerCheck.innerHTML = "";
 
     console.log("user selected " + this.value);
     if (this.value === questions[currentQ].correct) {
-        quizArea.appendChild(separatorBar);
+        answerCheck.appendChild(separatorBar);
+        console.log(quizArea);
         feedback.textContent = "☘️🍺🥳😃🥳🍺☘️Correct!☘️🍺🥳😃🥳🍺☘️";
         separatorBar.appendChild(feedback);
     } else {
-        quizArea.appendChild(separatorBar);
+        console.log(quizArea);
+        answerCheck.appendChild(separatorBar);
         feedback.textContent = "☘️🍺🤢🤮🤢🍺☘️Incorrect!☘️🍺🤢🤮🤢🍺☘️";
         separatorBar.appendChild(feedback);
         if (secondsLeft < 10) {
-            endGame();
+            secondsLeft = 1;
         } else {
             console.log(secondsLeft);
             secondsLeft -= 10;
