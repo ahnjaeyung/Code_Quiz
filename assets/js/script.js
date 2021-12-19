@@ -44,6 +44,7 @@ function startGame() {
 function endGame() {
     console.log("game over");
     clearInterval(timerInterval);
+    timeEl.textContent = "Time: " + secondsLeft;
     quizArea.innerHTML = "";
 
     var endGameHeader = document.createElement("h2");
@@ -76,24 +77,26 @@ function saveScore() {
     var userInitials = document.querySelector("#initials").value;
     console.log(userInitials);
     scoreToSave.initials = userInitials;
-    scoreToSave.score = secondsLeft;
+    scoreToSave.score = parseInt(secondsLeft);
     console.log(scoreToSave);
     prevScores.push(scoreToSave);
     console.log(JSON.stringify(prevScores));
     var newScores = JSON.stringify(prevScores)
     localStorage.setItem("scores", newScores);
+    window.location.replace("/highscores.html");
 }
 function displayQuestion() {
     quizArea.innerHTML = "";
-    currentQ++
+    currentQ++;
+    if (currentQ === questions.length) {
+        return endGame();
+    }
 
     console.log("display question\n" + JSON.stringify(questions[currentQ]));
     console.log("questions\n" + questions[currentQ].q);
     var questionTitle = document.createElement("h2");
     questionTitle.textContent = questions[currentQ].q;
     quizArea.appendChild(questionTitle);
-
-
 
     for (var i = 0; i < questions[currentQ].options.length; i++) {
         console.log(i + ". " + questions[currentQ].options[i]);
@@ -106,15 +109,9 @@ function displayQuestion() {
         buttonInput.appendChild(buttonText)
         buttonInput.onclick = handleUserAnswer;
         quizArea.appendChild(buttonInput);
-
-
-
-
     }
-
-
-
     console.log(document.querySelectorAll(".optionButton"));
+
 
 
 } // end displayQuestion function definition
@@ -140,6 +137,7 @@ function handleUserAnswer() {
         }
     }
     console.log(currentQ);
+    displayQuestion();
 }
 
 function setTime() {
