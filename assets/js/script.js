@@ -21,7 +21,9 @@ var questions = [
     }
 ]
 
-if ()
+if (localStorage.getItem("scores") === null) {
+    localStorage.setItem("scores", "[]");
+}
 
 var startButton = document.querySelector("#startButton");
 var timeEl = document.querySelector("#time");
@@ -54,6 +56,7 @@ function endGame() {
 
     var endGameForm = document.createElement("input");
     endGameForm.setAttribute("type", "text");
+    endGameForm.setAttribute("id", "initials");
     quizArea.appendChild(endGameForm);
 
 
@@ -66,7 +69,19 @@ function endGame() {
 } // end endGame function definition
 
 function saveScore() {
-    localStorage.setItem("scores", "")
+    var prevScores = JSON.parse(localStorage.getItem("scores"));
+    var scoreToSave = {
+        initials: "", score: ""
+    }
+    var userInitials = document.querySelector("#initials").value;
+    console.log(userInitials);
+    scoreToSave.initials = userInitials;
+    scoreToSave.score = secondsLeft;
+    console.log(scoreToSave);
+    prevScores.push(scoreToSave);
+    console.log(JSON.stringify(prevScores));
+    var newScores = JSON.stringify(prevScores)
+    localStorage.setItem("scores", newScores);
 }
 function displayQuestion() {
     quizArea.innerHTML = "";
