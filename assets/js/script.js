@@ -21,49 +21,118 @@ var questions = [
     }
 ]
 
+if ()
+
 var startButton = document.querySelector("#startButton");
 var timeEl = document.querySelector("#time");
 var quizArea = document.querySelector("#quizArea")
-var secondsLeft = 5;
+var secondsLeft = 75;
 var currentQ = -1;
+var timerInterval;
 
 startButton.addEventListener("click", startGame);
 
 function startGame() {
     setTime();
-    console.log("starting quiz",{
+    console.log("starting quiz", {
         currentQ
     });
-    displayQuestion(currentQ);
+    displayQuestion();
 }
 function endGame() {
     console.log("game over");
-} // end endGame function definition
-function displayQuestion(qNumber) {
-    var questionBody = "this is the question body";
+    clearInterval(timerInterval);
     quizArea.innerHTML = "";
-    qNumber++
 
-    console.log("display question\n" + JSON.stringify(questions[qNumber]));
-    console.log("questions\n" + questions[qNumber].q);
-    questionBody = "<h2>" + questions[qNumber].q + "</h2>";
-    
+    var endGameHeader = document.createElement("h2");
+    endGameHeader.textContent = "All done!";
+    quizArea.appendChild(endGameHeader);
 
-    for (var i = 0; i < questions[qNumber].options.length; i++) {
-        console.log(i + ". " + questions[qNumber].options[i]);
-        questionBody += "<button><p>" + (i + 1) + ". " + questions[qNumber].options[i] + "</p></button> <br>";
+    var endGameScore = document.createElement("p");
+    endGameScore.textContent = "Your final score is " + secondsLeft;
+    quizArea.appendChild(endGameScore);
+
+    var endGameForm = document.createElement("input");
+    endGameForm.setAttribute("type", "text");
+    quizArea.appendChild(endGameForm);
+
+
+    var endGameSubBtn = document.createElement("button");
+    endGameSubBtn.addEventListener("click", saveScore);
+    endGameSubBtn.textContent = "Submit";
+    quizArea.appendChild(endGameSubBtn);
+
+
+} // end endGame function definition
+
+function saveScore() {
+    localStorage.setItem("scores", "")
+}
+function displayQuestion() {
+    quizArea.innerHTML = "";
+    currentQ++
+
+    console.log("display question\n" + JSON.stringify(questions[currentQ]));
+    console.log("questions\n" + questions[currentQ].q);
+    var questionTitle = document.createElement("h2");
+    questionTitle.textContent = questions[currentQ].q;
+    quizArea.appendChild(questionTitle);
+
+
+
+    for (var i = 0; i < questions[currentQ].options.length; i++) {
+        console.log(i + ". " + questions[currentQ].options[i]);
+        var buttonText = document.createElement("p");
+        buttonText.textContent = (i + 1) + ". " + questions[currentQ].options[i];
+        var buttonInput = document.createElement("button");
+        buttonInput.setAttribute("class", "optionButton")
+        buttonInput.setAttribute("value", questions[currentQ].options[i])
+
+        buttonInput.appendChild(buttonText)
+        buttonInput.onclick = handleUserAnswer;
+        quizArea.appendChild(buttonInput);
+
+
+
+
     }
 
-    quizArea.innerHTML = questionBody;
+
+
+    console.log(document.querySelectorAll(".optionButton"));
+
+
 } // end displayQuestion function definition
 
+function handleUserAnswer() {
+    var separatorBar = document.createElement("hr")
+    var feedback = document.createElement("p")
+
+    console.log("user selected " + this.value);
+    if (this.value === questions[currentQ].correct) {
+        quizArea.appendChild(separatorBar);
+        feedback.textContent = "☘️🍺🥳😃🥳🍺☘️Correct!☘️🍺🥳😃🥳🍺☘️";
+        separatorBar.appendChild(feedback);
+    } else {
+        quizArea.appendChild(separatorBar);
+        feedback.textContent = "☘️🍺🤢🤮🤢🍺☘️Incorrect!☘️🍺🤢🤮🤢🍺☘️";
+        separatorBar.appendChild(feedback);
+        if (secondsLeft < 10) {
+            endGame();
+        } else {
+            console.log(secondsLeft);
+            secondsLeft -= 10;
+        }
+    }
+    console.log(currentQ);
+}
 
 function setTime() {
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         secondsLeft--;
+        console.log(secondsLeft);
         timeEl.textContent = "Time: " + secondsLeft;
         if (secondsLeft === 0) {
-            clearInterval(timerInterval);
             endGame();
         }
     }, 1000);
