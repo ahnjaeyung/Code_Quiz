@@ -18,6 +18,11 @@ var questions = [
         q: "What area of law does Charlie claim to specialize in?",
         options: ["Corporate Law", "Criminal Law", "Bird Law", "Maritime Law"],
         correct: "Bird Law"
+    },
+    {
+        q: "What kind of vehicle does Dennis drive?",
+        options: ["Toyota Prius", "Range Rover", "BMW 3-series", "Dodge Challenger"],
+        correct: "Range Rover"
     }
 ]
 
@@ -31,8 +36,34 @@ var quizArea = document.querySelector("#quizArea")
 var secondsLeft = 75;
 var currentQ = -1;
 var timerInterval;
+var highScoresTable = document.querySelector("#highScoresTable");
+var clearScoresBtn = document.querySelector("#clearScoresBtn");
 
-startButton.addEventListener("click", startGame);
+if (startButton) {
+    startButton.addEventListener("click", startGame);
+}
+if (highScoresTable) {
+    showScores();
+}
+if (clearScoresBtn) {
+    clearScoresBtn.addEventListener("click", clearScores);
+}
+
+function clearScores() {
+    localStorage.setItem("scores", "[]");
+    window.location.href = "index.html"
+}
+
+function showScores() {
+    var scoresList = ""
+    var currentScores = JSON.parse(localStorage.getItem("scores"));
+    currentScores.sort((a, b) => b.score - a.score);
+    console.log("Sorted scores: " + JSON.stringify(currentScores));
+    for (var i = 0; i < currentScores.length; i++) {
+        scoresList += `<p>${i+1}. ${currentScores[i].initials} : ${currentScores[i].score}</p>`
+    }
+    highScoresTable.innerHTML = scoresList
+}
 
 function startGame() {
     setTime();
@@ -83,7 +114,7 @@ function saveScore() {
     console.log(JSON.stringify(prevScores));
     var newScores = JSON.stringify(prevScores)
     localStorage.setItem("scores", newScores);
-    window.location.replace("/highscores.html");
+    window.location.href = "highscores.html"
 }
 function displayQuestion() {
     quizArea.innerHTML = "";
