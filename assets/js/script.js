@@ -83,7 +83,6 @@ function showScores() {
     var scoresList = ""
     var currentScores = JSON.parse(localStorage.getItem("scores"));
     currentScores.sort((a, b) => b.score - a.score);
-    console.log("Sorted scores: " + JSON.stringify(currentScores));
     for (var i = 0; i < currentScores.length; i++) {
         scoresList += `<p>${i+1}. ${currentScores[i].initials} : ${currentScores[i].score}</p>`
     }
@@ -92,13 +91,10 @@ function showScores() {
 
 function startGame() {
     setTime();
-    console.log("starting quiz", {
-        currentQ
-    });
     displayQuestion();
 }
+
 function endGame() {
-    console.log("game over");
     clearInterval(timerInterval);
     timeEl.textContent = "Time: " + secondsLeft;
     quizArea.innerHTML = "";
@@ -132,12 +128,9 @@ function saveScore() {
         initials: "", score: ""
     }
     var userInitials = document.querySelector("#initials").value;
-    console.log(userInitials);
     scoreToSave.initials = userInitials;
     scoreToSave.score = parseInt(secondsLeft);
-    console.log(scoreToSave);
     prevScores.push(scoreToSave);
-    console.log(JSON.stringify(prevScores));
     var newScores = JSON.stringify(prevScores)
     localStorage.setItem("scores", newScores);
     window.location.href = "highscores.html"
@@ -149,14 +142,11 @@ function displayQuestion() {
         return endGame();
     }
 
-    console.log("display question\n" + JSON.stringify(questions[currentQ]));
-    console.log("questions\n" + questions[currentQ].q);
     var questionTitle = document.createElement("h2");
     questionTitle.textContent = questions[currentQ].q;
     quizArea.appendChild(questionTitle);
 
     for (var i = 0; i < questions[currentQ].options.length; i++) {
-        console.log(i + ". " + questions[currentQ].options[i]);
         var buttonText = document.createElement("p");
         buttonText.textContent = (i + 1) + ". " + questions[currentQ].options[i];
         var buttonInput = document.createElement("button");
@@ -167,7 +157,6 @@ function displayQuestion() {
         buttonInput.onclick = handleUserAnswer;
         quizArea.appendChild(buttonInput);
     }
-    console.log(document.querySelectorAll(".optionButton"));
 
 
 
@@ -179,32 +168,26 @@ function handleUserAnswer() {
     var answerCheck = document.querySelector("#answerCheck")
     answerCheck.innerHTML = "";
 
-    console.log("user selected " + this.value);
     if (this.value === questions[currentQ].correct) {
         answerCheck.appendChild(separatorBar);
-        console.log(quizArea);
         feedback.textContent = "☘️🍺🥳😃🥳🍺☘️Correct!☘️🍺🥳😃🥳🍺☘️";
         separatorBar.appendChild(feedback);
     } else {
-        console.log(quizArea);
         answerCheck.appendChild(separatorBar);
         feedback.textContent = "☘️🍺🤢🤮🤢🍺☘️Incorrect!☘️🍺🤢🤮🤢🍺☘️";
         separatorBar.appendChild(feedback);
         if (secondsLeft < 10) {
             secondsLeft = 1;
         } else {
-            console.log(secondsLeft);
             secondsLeft -= 10;
         }
     }
-    console.log(currentQ);
     displayQuestion();
 }
 
 function setTime() {
     timerInterval = setInterval(function () {
         secondsLeft--;
-        console.log(secondsLeft);
         timeEl.textContent = "Time: " + secondsLeft;
         if (secondsLeft === 0) {
             endGame();
