@@ -49,11 +49,11 @@ var questions = [
         options: ["call function myFunction()", "call myFunction()", "myFunction()", "function myFunction()"],
         correct: "myFunction()"
     }
-]
+] // array of questions, answer choices, correct answers
 
 if (localStorage.getItem("scores") === null) {
     localStorage.setItem("scores", "[]");
-}
+} 
 
 var startButton = document.querySelector("#startButton");
 var timeEl = document.querySelector("#time");
@@ -77,22 +77,22 @@ if (clearScoresBtn) {
 function clearScores() {
     localStorage.setItem("scores", "[]");
     window.location.href = "index.html"
-}
+} // end clearScores function definition
 
 function showScores() {
     var scoresList = ""
     var currentScores = JSON.parse(localStorage.getItem("scores"));
     currentScores.sort((a, b) => b.score - a.score);
     for (var i = 0; i < currentScores.length; i++) {
-        scoresList += `<p>${i+1}. ${currentScores[i].initials} : ${currentScores[i].score}</p>`
+        scoresList += `<p>${i+1}. ${currentScores[i].initials} : ${currentScores[i].score}</p>` //template literals, string interpolation, variable substitutions
     }
     highScoresTable.innerHTML = scoresList
-}
+} // end showScores function definition
 
 function startGame() {
     setTime();
     displayQuestion();
-}
+} //end startGame function definition
 
 function endGame() {
     clearInterval(timerInterval);
@@ -134,7 +134,8 @@ function saveScore() {
     var newScores = JSON.stringify(prevScores)
     localStorage.setItem("scores", newScores);
     window.location.href = "highscores.html"
-}
+} //end saveScore function definition
+
 function displayQuestion() {
     quizArea.innerHTML = "";
     currentQ++;
@@ -157,9 +158,6 @@ function displayQuestion() {
         buttonInput.onclick = handleUserAnswer;
         quizArea.appendChild(buttonInput);
     }
-
-
-
 } // end displayQuestion function definition
 
 function handleUserAnswer() {
@@ -183,7 +181,7 @@ function handleUserAnswer() {
         }
     }
     displayQuestion();
-}
+} // end handleUserAnswer function definition
 
 function setTime() {
     timerInterval = setInterval(function () {
@@ -193,7 +191,8 @@ function setTime() {
             endGame();
         }
     }, 1000);
-} // end setTime function definition
+}  //end setTime function definition
+
 // Click on Start button
     // Start the timer
     // Display the first question with options 
