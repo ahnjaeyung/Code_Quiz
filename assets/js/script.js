@@ -1,53 +1,53 @@
 var questions = [
     {
-        q: "Which one of the characters is not in season one?",
-        options: ["Dennis", "Sweet Dee", "Mac", "Frank"],
-        correct: "Frank"
+        q: "Commonly used data types DO NOT include:",
+        options: ["strings", "booleans", "alerts", "numbers"],
+        correct: "alerts"
     },
     {
-        q: "Who does Charlie first tell he has cancer?",
-        options: ["Dennis", "Sweet Dee", "Mac", "Frank"],
-        correct: "Dennis"
+        q: "The condition in an if/else statement is enclosed within ________.",
+        options: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        correct: "parentheses"
     },
     {
-        q: "According to Dennis, what does the D in 'D.E.N.N.I.S. System' stand for?",
-        options: ["Decline their advances", "Demonstrate your value", "Don't ask for permission", "Defer emotion"],
-        correct: "Demonstrate your value"
+        q: "Arrays in JavaScript can be used to store ________.",
+        options: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+        correct: "all of the above"
     },
     {
-        q: "What area of law does Charlie claim to specialize in?",
-        options: ["Corporate Law", "Criminal Law", "Bird Law", "Maritime Law"],
-        correct: "Bird Law"
+        q: "String values must be enclosed within ________ when being assigned to variables",
+        options: ["commas", "curly brackets", "quotes", "parentheses"],
+        correct: "quotes"
     },
     {
-        q: "What kind of vehicle does Dennis drive?",
-        options: ["Toyota Prius", "Range Rover", "BMW 3-series", "Dodge Challenger"],
-        correct: "Range Rover"
+        q: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        options: ["JavaScript", "terminal/bash", "for loops", "console log"],
+        correct: "console log"
     },
     {
-        q: "What movie franchise does the gang remake?",
-        options: ["Jaws", "Lethal Weapon", "Thunder Gun Express", "Die Hard"],
-        correct: "Lethal Weapon"
+        q: "Inside which HTML element do we put the JavaScript?",
+        options: ["<script>", "<javascript>", "<scripting>", "<js>"],
+        correct: "<script>"
     },
     {
-        q: "How does Mac's cousin, Country Mac, die?",
-        options: ["Falling off his motorcycle", "Jumping off a bridge", "Drunken bar fight", "Eaten by a whale"],
-        correct: "Falling off his motorcycle"
+        q: "How do you declare a JavaScript variable?",
+        options: ["var userName", "variable userName", "v userName", "variable = userName"],
+        correct: "var userName"
     },
     {
-        q: "Who is Charlie in love with?",
-        options: ["Dee", "Artemis", "Gale the Snail", "The Waitress"],
-        correct: "The Waitress"
+        q: "How do you write 'Hello World' in an alert box?",
+        options: ["alertBox('Hello World');", "alert('Hello World');", "msg('Hello World');", "msgBox('Hello World');"],
+        correct: "alert('Hello World');"
     },
     {
-        q: "What is Charlie's uncle's profession?",
-        options: ["Lawyer", "Doctor", "Teacher", "Police Officer"],
-        correct: "Lawyer"
+        q: "How do you create a function in JavaScript?",
+        options: ["function = myFunction()", "function:myFunction()", "function{myFunction()}", "function myFunction()"],
+        correct: "function myFunction()"
     },
     {
-        q: "What kind of business do the gang own?",
-        options: ["Thrift store", "Bowling Alley", "Pawn Shop", "Bar"],
-        correct: "Bar"
+        q: "How do you call a function named 'myFunction'?",
+        options: ["call function myFunction()", "call myFunction()", "myFunction()", "function myFunction()"],
+        correct: "myFunction()"
     }
 ]
 
@@ -170,11 +170,11 @@ function handleUserAnswer() {
 
     if (this.value === questions[currentQ].correct) {
         answerCheck.appendChild(separatorBar);
-        feedback.textContent = "☘️🍺🥳😃🥳🍺☘️Correct!☘️🍺🥳😃🥳🍺☘️";
+        feedback.textContent = "✅😃Correct!😃✅";
         separatorBar.appendChild(feedback);
     } else {
         answerCheck.appendChild(separatorBar);
-        feedback.textContent = "☘️🍺🤢🤮🤢🍺☘️Incorrect!☘️🍺🤢🤮🤢🍺☘️";
+        feedback.textContent = "❌😧Incorrect!😧❌";
         separatorBar.appendChild(feedback);
         if (secondsLeft < 10) {
             secondsLeft = 1;
