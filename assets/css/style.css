@@ -65,3 +65,8 @@ input {
     font-style: italic;
     font-family: sans-serif;
 }
+#highScoresTable {
+    background-color: cornsilk;
+    padding: 20px;
+    border-radius:20px;
+}

@@ -66,13 +66,13 @@ var clearScoresBtn = document.querySelector("#clearScoresBtn");
 
 if (startButton) {
     startButton.addEventListener("click", startGame);
-}
+} // adds startButton event for index.html
 if (highScoresTable) {
     showScores();
-}
+} // calls showScores function for highscores.html
 if (clearScoresBtn) {
     clearScoresBtn.addEventListener("click", clearScores);
-}
+} // adds clearScoresBtn event for highscores.html
 
 function clearScores() {
     localStorage.setItem("scores", "[]");
