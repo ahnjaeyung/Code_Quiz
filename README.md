@@ -1,4 +1,4 @@
-# Homework 4: Code Quiz #
+# Code Quiz #
 Code Quiz - Jae Ahn
 ![Coding Quiz Page 1](./assets/images/Screenshot1.png)
 ![Coding Quiz Page 2](./assets/images/Screenshot2.png)
