@@ -12,6 +12,11 @@ At the start of the application, the user is presented with a start button.  Onc
 
 Once the quiz is over, the user is presented with a message informing them of their score (amount of time left at completion of the quiz) and they are able to enter and submit their initials in a form.  After the user submits this form, the user's initials and score are saved to local storage, and the user is taken to the *High Scores* page which displays a ranked list of the initials and scores of previous quiz takers.  At this page, the user is presented with two buttons.  The *Go Back* button will take the user back to the original *Coding Quiz* page, where they can start the quiz again.  The *Clear Scores* button will clear the high scores list and take the user back to the original *Coding Quiz* page.  At any point while at the *Coding Quiz* page, the user can click the *View Highscores* link at the top of the screen to go to the *High Scores* page.
 
+This application was created using technologies such as:
+* HTML
+* CSS
+* JavaScript
+
 Link to Deployed Application
 ---------------
 [Coding Quiz](https://ahnjaeyung.github.io/Code_Quiz/)
