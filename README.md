@@ -14,4 +14,4 @@ Once the quiz is over, the user is presented with a message informing them of th
 
 Link to Deployed Application
 ---------------
-[Coding Quiz](https://ahnjaeyung.github.io/Homework_4_Code_Quiz/)
+[Coding Quiz](https://ahnjaeyung.github.io/Code_Quiz/)
